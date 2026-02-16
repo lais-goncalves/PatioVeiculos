@@ -1,0 +1,104 @@
+<app-titulo titulo="Cadastrar Veículo"></app-titulo>
+
+<div class="card">
+  <form [formGroup]="this.form">
+    <div class="p-3 pt-4">
+      <h3>Novo veículo</h3>
+    </div>
+
+    <div class="px-3 py-3">
+      <div class="mb-3 row">
+        <div class="col-4">
+          <label for="txtPlaca" class="form-label">Placa</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtPlaca"
+            formControlName="placa"
+            [ngClass]="this.validarCampoVeiculos('placa')"
+          >
+          @if (controls.placa?.errors?.required) {
+            <div class="invalid-feedback">Placa é obrigatório.</div>
+          }
+
+          @else if (controls.placa?.errors?.placaJaExiste) {
+            <div class="invalid-feedback">Esta placa já está cadastrada.</div>
+          }
+
+          @else if (controls.placa?.errors?.minlength || controls.placa?.errors?.maxlength) {
+            <div class="invalid-feedback">A placa deve conter de 7 a 9 caracteres.</div>
+          }
+        </div>
+
+        <div class="col-4">
+          <label for="txtModelo" class="form-label">Modelo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtModelo"
+            formControlName="modelo"
+            [ngClass]="this.validarCampoVeiculos('modelo')"
+          >
+          @if (controls.modelo?.errors?.required) {
+            <div class="invalid-feedback">Modelo é obrigatório.</div>
+          }
+
+          @else if (controls.modelo?.errors?.minlength || controls.modelo?.errors?.maxlength) {
+            <div class="invalid-feedback">O modelo deve conter de 2 a 20 caracteres.</div>
+          }
+       </div>
+
+        <div class="col-4">
+          <label for="txtCor" class="form-label">Cor</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtCor"
+            formControlName="cor"
+            [ngClass]="this.validarCampoVeiculos('cor')"
+          >
+          @if (controls.cor?.errors?.required) {
+            <div class="invalid-feedback">Cor é obrigatório.</div>
+          }
+
+          @else if (controls.cor?.errors?.minlength || controls.cor?.errors?.maxlength) {
+            <div class="invalid-feedback">A cor deve conter de 3 a 20 caracteres.</div>
+          }
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col-4">
+          <label for="txtTipo" class="form-label">Tipo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtTipo"
+            formControlName="tipo"
+            [ngClass]="this.validarCampoVeiculos('tipo')"
+          >
+          @if (controls.tipo?.errors?.required) {
+            <div class="invalid-feedback">Tipo é obrigatório.</div>
+          }
+
+          @else if (controls.tipo?.errors?.minlength || controls.tipo?.errors?.maxlength) {
+            <div class="invalid-feedback">O tipo deve conter de 2 a 20 caracteres.</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <hr class="m-0" />
+
+    <div class="row p-3 d-flex justify-content-end">
+      <div class="col-auto">
+        <button
+          class="btn btn-primary"
+          (click)="cadastrarVeiculo()"
+          [disabled]="this.form.invalid"
+        > Cadastrar veículo</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+

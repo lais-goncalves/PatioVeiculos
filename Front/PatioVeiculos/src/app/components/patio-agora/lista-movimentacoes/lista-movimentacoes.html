@@ -1,0 +1,77 @@
+<app-titulo titulo="Pátio Agora"></app-titulo>
+
+<div class="mb-3">
+  <button class="btn btn-primary" (click)="cadastrarEntrada()">Cadastrar nova entrada</button>
+</div>
+
+<div class="card">
+  <form class="p-3" >
+    <div class="row">
+      <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label fw-bold">Pesquisar veículo:</label>
+      <div class="col-xs-3 col-sm-auto">
+        <input id="table-filtering-search" class="form-control" [(ngModel)]="filtro" name="filtro" placeholder="Insira a placa" />
+      </div>
+    </div>
+  </form>
+
+  <hr class="m-0" />
+
+  <div class="p-4 mt-2">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Placa</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Cor</th>
+        <th scope="col">Tipo</th>
+        <th scope="col" class="col-2">Saída</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (veiculo of this.veiculosFiltrados ?? this.veiculos; track $index) {
+          <tr>
+            <td>{{ veiculo.placa }}</td>
+            <td>{{ veiculo.modelo }}</td>
+            <td>{{ veiculo.cor }}</td>
+            <td>{{ veiculo.tipo }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="this.abrirModal(content, veiculo.placa)">Registrar Saída</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Registrar Saída de Veículo</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="fecharModal()"></button>
+  </div>
+  <div class="modal-body px-5 py-4">
+    <form>
+      <div class="mb-4">
+        <h4>Dados do veículo</h4>
+        <ul>
+          <li><b>Placa:</b> {{this.infoSaida.veiculo?.placa}}</li>
+          <li><b>Modelo:</b> {{this.infoSaida.veiculo?.modelo}}</li>
+          <li><b>Cor:</b> {{this.infoSaida.veiculo?.cor}}</li>
+          <li><b>Tipo:</b> {{this.infoSaida.veiculo?.tipo}}</li>
+        </ul>
+      </div>
+      <div class="mb-4">
+        <h4>Informações da saída</h4>
+        <ul>
+          <li><b>Data e hora de entrada:</b> {{this.infoSaida.movimentacao?.dataHoraEntrada}}</li>
+          <li><b>Data e hora de saída (saindo agora):</b> {{this.infoSaida.movimentacao?.dataHoraSaida}}</li>
+        </ul>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer d-flex justify-content-between py-3">
+    <h4>Total: R${{this.infoSaida.movimentacao?.valorCobrado}}</h4>
+    <button type="button" class="btn btn-primary" (click)="this.registrarSaida(this.infoSaida?.veiculo.placa)">Registrar saída</button>
+  </div>
+</ng-template>

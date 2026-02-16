@@ -1,0 +1,64 @@
+<app-titulo titulo="Cadastrar Entrada"></app-titulo>
+
+<div class="card">
+  <form [formGroup]="this.form">
+    <div class="p-3 pt-4">
+      <h3>Nova entrada</h3>
+    </div>
+
+    <div class="px-3 py-3">
+      <div class="mb-3 row">
+        <div class="col-4">
+          <label for="txtPlaca" class="form-label">Placa do veículo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="txtPlaca"
+            formControlName="placaVeiculo"
+            [ngClass]="this.validarCampoVeiculos('placaVeiculo')"
+          >
+          @if (controls.placaVeiculo?.errors?.required) {
+            <div class="invalid-feedback">Placa é obrigatório.</div>
+          }
+
+          @else if (controls.placaVeiculo?.errors?.placaNaoExiste) {
+            <div class="invalid-feedback">Não existe um veículo cadastrado com esta placa.</div>
+          }
+
+          @else if (controls.placaVeiculo?.errors?.jaEstaNoPatio) {
+            <div class="invalid-feedback">Este veículo já está no pátio.</div>
+          }
+        </div>
+
+        <div class="col-4">
+          <label for="txtDataEntrada" class="form-label">Data e hora de entrada</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="txtDataEntrada"
+            formControlName="dataHoraEntrada"
+            [ngClass]="this.validarCampoVeiculos('dataHoraEntrada')"
+          >
+          @if (controls.dataHoraEntrada?.errors?.required) {
+            <div class="invalid-feedback">Data e hora entrada são obrigatórios.</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <hr class="m-0" />
+
+    <div class="row p-3 d-flex justify-content-end">
+      <div class="col-auto">
+        <button
+          class="btn btn-primary"
+          (click)="cadastrarEntrada()"
+          [disabled]="this.form.invalid"
+        >Cadastrar entrada
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+

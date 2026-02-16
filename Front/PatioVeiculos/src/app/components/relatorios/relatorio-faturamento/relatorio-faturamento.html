@@ -1,0 +1,20 @@
+<div class="p-3">
+  <h3 class="pb-3">Relatório de Faturamento</h3>
+
+  <form [formGroup]="form">
+    <div class="row d-flex flex-row">
+      <label class="col-auto">
+        <input type="radio" formControlName="qtdDias" value="7" (change)="mudouValorRadio(7)" /> 7 dias
+      </label>
+      <label class="col-auto">
+        <input type="radio" formControlName="qtdDias" value="30" (change)="mudouValorRadio(30)" /> 30 dias
+      </label>
+    </div>
+
+    <hr />
+
+    <ul>
+      <li><b>Total faturado: </b> R${{this.faturamento.totalFaturado}}</li>
+    </ul>
+  </form>
+</div>

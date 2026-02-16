@@ -1,0 +1,36 @@
+<app-titulo titulo="Veículos"></app-titulo>
+
+<div class="mb-3">
+  <button class="btn btn-primary" (click)="cadastrarVeiculo()">Cadastrar novo veículo</button>
+</div>
+
+<div class="card">
+  <div class="p-4 mt-2">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Placa</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Cor</th>
+        <th scope="col">Tipo</th>
+        <th scope="col" class="col-1">Editar</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (veiculo of this.veiculos; track $index) {
+          <tr>
+            <td>{{ veiculo.placa }}</td>
+            <td>{{ veiculo.modelo }}</td>
+            <td>{{ veiculo.cor }}</td>
+            <td>{{ veiculo.tipo }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="editarVeiculo(veiculo.id)">Editar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

@@ -1,0 +1,12 @@
+@import "bootstrap/scss/bootstrap";
+
+header {
+  $primary: #eee !important;
+
+  background-color: #2b5470 !important;
+  color: white !important;
+
+  & * {
+    color: white !important;
+  }
+}
